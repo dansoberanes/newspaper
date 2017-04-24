@@ -9,10 +9,10 @@ class Content(models.Model):
     pub_date = models.DateTimeField('date published')
 
 class Article(Content):
-    title = Content.title
-    subtitle = Content.subtitle
+    title = Content().title
+    subtitle = Content().subtitle
     contributors = Content.contributors
-    pub_date = Content.pub_date
+    pub_date = Content().pub_date
 
     text = models.TextField('article text', default='TEXT')
 
@@ -21,11 +21,6 @@ class Article(Content):
 
     class Meta:
         ordering = ('title',)
-
-    def show(self):
-        string = "Title: " + self.title + "\nSubtitle: " + self.subtitle \
-        + "\nPublished: " + self.pub_date + "\n\n" + self.text
-        return string
 
 
 class Contributor(models.Model):
@@ -40,3 +35,4 @@ class Contributor(models.Model):
 
     def die(self):
         self.models.delete()
+        
