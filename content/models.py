@@ -1,4 +1,5 @@
 from django.db import models
+from tinymce import models as tinymce_models
 
 
 class Content(models.Model):
@@ -14,7 +15,7 @@ class Article(Content):
     contributors = Content.contributors
     pub_date = Content().pub_date
 
-    text = models.TextField('article text', default='TEXT')
+    text = tinymce_models.HTMLField()
 
     def __str__(self):
         return self.title
@@ -26,6 +27,7 @@ class Article(Content):
 class Contributor(models.Model):
     first_name = models.CharField(max_length=500)
     last_name = models.CharField(max_length=500)
+    position = models.CharField(max_length=500)
 
     def __str__(self):
         return self.first_name + " " + self.last_name
